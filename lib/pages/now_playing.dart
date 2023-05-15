@@ -5,15 +5,18 @@ import 'package:just_audio/just_audio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class NowPlaying extends StatefulWidget {
-  const NowPlaying({super.key, required this.songModel});
+  const NowPlaying(
+      {super.key, required this.songModel, required this.audioPlayer});
   final SongModel songModel;
+  final AudioPlayer audioPlayer;
 
   @override
   State<NowPlaying> createState() => _NowPlayingState();
 }
 
 class _NowPlayingState extends State<NowPlaying> {
-  final AudioPlayer _audioPlayer = AudioPlayer();
+  Duration _duration = Duration();
+  Duration _position = Duration();
 
   bool _isPlaying = false;
 
@@ -25,16 +28,23 @@ class _NowPlayingState extends State<NowPlaying> {
 
   void playSong() {
     try {
-      _audioPlayer.setAudioSource(
+      widget.audioPlayer.setAudioSource(
         AudioSource.uri(
           Uri.parse(widget.songModel.uri!),
         ),
       );
-      _audioPlayer.play();
+      widget.audioPlayer.play();
       _isPlaying = true;
     } on Exception {
       log('Cannot Parse Son g' as num);
     }
+    widget.audioPlayer.durationStream.listen((d) {
+      _duration = d!;
+    });
+
+    widget.audioPlayer.positionStream.listen((p) {
+      _position = p;
+    });
   }
 
   @override
@@ -89,14 +99,21 @@ class _NowPlayingState extends State<NowPlaying> {
                   SizedBox(height: 10),
                   Row(
                     children: [
-                      Text('0.0'),
+                      Text(_position.toString().split('.')[0]),
                       Expanded(
                         child: Slider(
-                          value: 0,
-                          onChanged: (value) {},
+                          min: Duration(milliseconds: 0).inSeconds.toDouble(),
+                          max: _duration.inSeconds.toDouble(),
+                          value: _position.inSeconds.toDouble(),
+                          onChanged: (value) {
+                            setState(() {
+                              changeToSeconds(value.toInt());
+                              value = value;
+                            });
+                          },
                         ),
                       ),
-                      Text('0.0'),
+                      Text(_duration.toString().split('.')[0]),
                     ],
                   ),
                   Row(
@@ -114,9 +131,9 @@ class _NowPlayingState extends State<NowPlaying> {
                           onPressed: () {
                             setState(() {
                               if (_isPlaying) {
-                                _audioPlayer.pause();
+                                widget.audioPlayer.pause();
                               } else {
-                                _audioPlayer.play();
+                                widget.audioPlayer.play();
                               }
                               _isPlaying = !_isPlaying;
                             });
@@ -133,5 +150,10 @@ class _NowPlayingState extends State<NowPlaying> {
         ),
       )),
     );
+  }
+
+  void changeToSeconds(int seconds) {
+    Duration duration = Duration(seconds: seconds);
+    widget.audioPlayer.seek(duration);
   }
 }

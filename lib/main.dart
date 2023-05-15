@@ -100,8 +100,10 @@ class _AllSongsState extends State<AllSongs> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        NowPlaying(songModel: item.data![index]),
+                    builder: (context) => NowPlaying(
+                      songModel: item.data![index],
+                      audioPlayer: _audioPlayer,
+                    ),
                   ),
                 );
                 //playSong(item.data![index].uri);
