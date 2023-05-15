@@ -33,6 +33,16 @@ class AllSongs extends StatefulWidget {
 }
 
 class _AllSongsState extends State<AllSongs> {
+  @override
+  void initState() {
+    super.initState();
+    requestPermission();
+  }
+
+  void requestPermission() {
+    Permission.storage.request();
+  }
+
   final _audioQuery = OnAudioQuery();
 
   @override
@@ -66,7 +76,7 @@ class _AllSongsState extends State<AllSongs> {
             );
           }
           return ListView.builder(
-            itemCount: 100,
+            itemCount: item.data!.length,
             itemBuilder: (context, index) => ListTile(
               leading: Icon(Icons.music_note),
               title: Text(item.data![index].displayNameWOExt),
