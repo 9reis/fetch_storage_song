@@ -75,6 +75,19 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_web_plugins:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  id3:
+    dependency: transitive
+    description:
+      name: id3
+      sha256: "24176a6e08db6297c8450079e94569cd8387f913c817e5e3d862be7dc191e0b8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   js:
     dependency: transitive
     description:
@@ -115,6 +128,46 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
+  on_audio_query:
+    dependency: "direct main"
+    description:
+      name: on_audio_query
+      sha256: a06f314f0db21d1654558def8359e8e18c4f917c199353d70e6261b28aa8d01f
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.8.1"
+  on_audio_query_android:
+    dependency: transitive
+    description:
+      name: on_audio_query_android
+      sha256: a2f15ce68841f29a4492a93c81964a13ee56fa78a329db8a4889255f763c28ef
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
+  on_audio_query_ios:
+    dependency: transitive
+    description:
+      name: on_audio_query_ios
+      sha256: "03b8e19102f919715db03355b14a2cbea87f3d5b18404352320f3b42eb7b3290"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
+  on_audio_query_platform_interface:
+    dependency: transitive
+    description:
+      name: on_audio_query_platform_interface
+      sha256: "39a64805cd620d35c4eda6944b8476831437efd617b98f84946b8086dd27739d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.6.1"
+  on_audio_query_web:
+    dependency: transitive
+    description:
+      name: on_audio_query_web
+      sha256: "616d57400661fb7e5b13fb163cedc285a841bde7cb9197ae53dc5bfb295faca1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.5.1"
   path:
     dependency: transitive
     description:
@@ -123,6 +176,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.3"
+  plugin_platform_interface:
+    dependency: transitive
+    description:
+      name: plugin_platform_interface
+      sha256: "6a2128648c854906c53fa8e33986fc0247a1116122f9534dd20e3ab9e16a32bc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.4"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -186,3 +247,4 @@ packages:
     version: "2.1.4"
 sdks:
   dart: ">=3.0.0 <4.0.0"
+  flutter: ">=2.5.0"
